@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+    <div id = "app">
+        <p>{{ name }}</p>
+        <textarea>{{ info }}</textarea>
+        <el-button v-on:click="greet">按钮</el-button>
+    </div>
+</body>
+<script>
+var vm = new Vue({
+    el: '#app',
+    data: {
+        name: 'Vue.js',
+        info: "test"
+    },
+    methods: {
+        greet: function (event) {
+               axios
+                .post('http://127.0.0.1:8080/regular',{
+                    data: this.name
+                })
+                .then(response => (this.info = response))
+                .catch(function (error) { // 请求失败处理
+                    console.log(error);
+               });
+        }
+    }
+});
+</script>
+</html>

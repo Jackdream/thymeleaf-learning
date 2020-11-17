@@ -19,7 +19,6 @@ public class RegularDemo {
         Matcher matcher = pattern.matcher(data);
         while(matcher.find())
             ls.add(matcher.group() + "\n");
-
         System.out.println(ls);
     }
 }
