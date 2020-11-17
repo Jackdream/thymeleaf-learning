@@ -10,23 +10,28 @@
 </head>
 <body>
     <div id = "app">
-        <p>{{ name }}</p>
-        <textarea>{{ info }}</textarea>
         <el-button v-on:click="greet">按钮</el-button>
+        <el-input
+                type="textarea"
+                :rows="25"
+                placeholder="请输入内容"
+                v-model="textarea">
+        </el-input>
+        <p>{{ info }}</p>
     </div>
 </body>
 <script>
 var vm = new Vue({
     el: '#app',
     data: {
-        name: 'Vue.js',
+        textarea: "test",
         info: "test"
     },
     methods: {
         greet: function (event) {
                axios
                 .post('http://127.0.0.1:8080/regular',{
-                    data: this.name
+                    data: this.textarea
                 })
                 .then(response => (this.info = response))
                 .catch(function (error) { // 请求失败处理
